@@ -8,10 +8,18 @@
 ```
  |- array
         |- array.go      //核心文件
-        |- array_test.go //测试文件
+        |- test.go //测试文件
 ```
 
-## 来源
+## 函数分类列表
+
+| 功能 | 包名 |  备注 |
+| :--- | :--- | :--- |
+| 数值转换 | [convertor](convertor) | 操作数字等 |
+| 时间 | [datetime](datetime) |  操作时间等|
+
+
+## 贡献来源
 > 一般来源于github和我们自己写的
 
 ### 来源名单
