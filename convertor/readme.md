@@ -9,4 +9,4 @@
 1. [任意类型转int64](integer.go)
 
 ## 导航
-- [首页](../readme.go)
+- [首页](../readme.md)
