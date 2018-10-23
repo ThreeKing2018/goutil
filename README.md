@@ -8,7 +8,7 @@
 ```
  |- array
         |- array.go      //核心文件
-        |- test.go //测试文件
+        |- array_test.go //测试文件
 ```
 
 ## 函数分类列表
