@@ -7,3 +7,6 @@
 1. [string to int](integer.go)
 1. [int to int64](integer.go)
 1. [任意类型转int64](integer.go)
+
+## 导航
+- [首页](../readme.go)
