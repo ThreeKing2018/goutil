@@ -29,7 +29,6 @@ func CmdOutNoLn(name string, arg ...string) (out string, err error) {
 	if err != nil {
 		return
 	}
-
 	return strtool.TrimRightSpace(string(out)), nil
 }
 

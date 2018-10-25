@@ -29,7 +29,10 @@ func GetBeforeTimesStamp(beforeSecond int) string {
 func GetNextTimesStamp(nextSecond int) string {
 	return time.Unix(time.Now().In(ChinaLocation).Unix() + int64(nextSecond),0).Format(format)
 }
-
+//时间戳转时间格式
+func GetDate(t int64) string {
+	return time.Unix(t, 0).Format(format)
+}
 // Format time.Time struct to string
 // MM - month - 01
 // M - month - 1, single bit
