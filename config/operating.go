@@ -1,8 +1,8 @@
 package config
 
 import (
-	"gogs.163.com/feiyu/goutil/config/ini"
-	"gogs.163.com/feiyu/goutil/config/json"
+	"github.com/ThreeKing2018/goutil/config/ini"
+	"github.com/ThreeKing2018/goutil/config/json"
 	"io"
 	"strings"
 )

@@ -2,9 +2,9 @@ package backend
 
 import (
 	"errors"
-	"gogs.163.com/feiyu/goutil/config/backend/etcd"
-	"gogs.163.com/feiyu/goutil/config/backend/file"
-	"gogs.163.com/feiyu/goutil/config/backend/resp"
+	"github.com/ThreeKing2018/goutil/config/backend/etcd"
+	"github.com/ThreeKing2018/goutil/config/backend/file"
+	"github.com/ThreeKing2018/goutil/config/backend/resp"
 )
 
 //type KVPair struct {

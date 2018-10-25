@@ -1,14 +1,16 @@
 package config
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/ThreeKing2018/goutil/golog"
+)
 
 func (v *viper) Stop() {
 	v.stop <- struct{}{}
 }
 
 //这里的stop 以后可以换成context,,  string, map，[]string  []int 都能自动转换,其他类型需要自定义fn函数
-func (v *viper) WatchConfig() error {
-
+func (v *viper) WatchConfig() {
 	remotechan := v.backend.Watch(v.stop)
 	//var a backends.Response
 	go func() {
@@ -16,7 +18,6 @@ func (v *viper) WatchConfig() error {
 			select {
 			case a := <-remotechan: //TODO 还有DELETE类型没有判断
 				if a.Error != nil {
-					fmt.Println("err1", a.Error)
 					continue
 				}
 
@@ -26,13 +27,15 @@ func (v *viper) WatchConfig() error {
 				}
 
 				//这里是其他的backend
-
-				v.Set(a.Key, a.Value)
+				err := v.Set(a.Key, a.Value)
+				if err != nil {
+					golog.Error(err.Error())
+				}
 
 				//保存到本地
-				err := v.writeConfig()
-				//TODO 这里的错误怎么处理呢
+				err = v.writeConfig()
 				if err != nil {
+					golog.Error(err.Error())
 					fmt.Println(err)
 				}
 
@@ -41,7 +44,4 @@ func (v *viper) WatchConfig() error {
 			}
 		}
 	}()
-	//r.WatchConfig(v)
-
-	return nil
 }

@@ -3,8 +3,8 @@ package etcd
 import (
 	"context"
 	"fmt"
+	"github.com/ThreeKing2018/goutil/config/backend/resp"
 	goetcd "github.com/coreos/etcd/client"
-	"gogs.163.com/feiyu/goutil/config/backend/resp"
 	"strings"
 	"time"
 )
@@ -86,7 +86,6 @@ func (c *client) List(respChan chan *resp.Response) error {
 	}
 	err = c.nodeWalk(resp.Node, respChan)
 	if err != nil {
-		//fmt.Println(err)
 		return err
 	}
 
