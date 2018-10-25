@@ -1,57 +1,26 @@
 package config
 
 import (
-	"bytes"
-	"fmt"
-	"gogs.163.com/feiyu/goutil/files"
-	"log"
+	"github.com/ThreeKing2018/goutil/config/backend"
 	"os"
 	"path"
-	//"gogs.163.com/feiyu/goutil/config/backends"
-	"github.com/coreos/etcd/client"
-	"gogs.163.com/feiyu/goutil/config/backend"
-	"gogs.163.com/feiyu/goutil/config/backend/resp"
 	"sync"
-	"time"
 )
 
-//接口添加able 组合 viperable
 type Viperable interface {
-	//配置文件的初始化
-	SetDefault(key string, value interface{})
-	SetConfig(cfgfile, cfgtype string, cfgpath ...string)
-	SetKeyDelim(delim string)
+	SetDefault(key string, value interface{}) Viperable
+	SetKeyDelim(delim string) Viperable
+	SetConfig(cfgfile, cfgtype string, cfgpath ...string) Viperable
+	SetFunc(fn func(key string, value interface{}) error) Viperable
+	RemoteConfig(prefix string, endpoint []string) Viperable
 
-	//WatchConfig(remoteCfg *backend.Config) error
+	//配置文件的操作
+	writeConfig() error
+	ReadConfig() error
+
+	//配置文件动态加载
 	WatchConfig() error
 	Stop()
-	//Getdefault() map[string]interface{}
-	//Getconfig() map[string]interface{}
-
-	Getconfig() map[string]interface{}
-	//Get方法
-	Getvalue
-
-	//AddConfigPath(cfgpath string)
-	//Operater
-
-	//对配置文件的操作
-	ReadConfig() error
-	WriteConfig() error
-
-	ReadRemoteConfig() error
-
-	SetFunc(fn func(key string, value interface{}) error)
-
-	//设置本地配置文件
-	LocalConfig() *backend.Config
-
-	//设置远程接口
-	EtcdConfig(prefix string, endpoint []string)
-
-	//远程配置
-	//AddRemoteProvider(provider, endpoint, path string) error
-
 }
 
 type viper struct {
@@ -71,12 +40,9 @@ type viper struct {
 	backend   backend.StoreClient
 
 	// 配置值相关的
-	config map[string]interface{}
-	//override       map[string]interface{}
+	config   map[string]interface{}
 	defaults map[string]interface{}
-	//kvstore        map[string]interface{}
-	//pflags         map[string]FlagValue
-	stop chan struct{}
+	stop     chan struct{}
 	//TODO改怎么解释这个函数的作用大呢
 	fn func(key string, value interface{}) error
 
@@ -99,60 +65,22 @@ func New() Viperable {
 	return v
 }
 
-func (v *viper) LocalConfig() *backend.Config {
+// 注册默认值
+func (v *viper) SetDefault(key string, value interface{}) Viperable {
+	v.defaults[key] = value
+	return v
+}
 
-	if v.configFile == "" {
-		panic(NotFoundConfigError(v.configName))
+func (v *viper) SetKeyDelim(delim string) Viperable {
+	if delim != "" {
+		v.keyDelim = delim
 	}
 
-	a := &backend.Config{
-		Delim:   v.keyDelim,
-		Backend: "file",
-	}
-	v.backendInit(a)
-
-	return a
-}
-
-func (v *viper) EtcdConfig(prefix string, endpoint []string) {
-	a := &backend.Config{
-		Delim:    v.keyDelim,
-		Backend:  "etcd",
-		Prefix:   prefix,
-		Endpoint: endpoint,
-	}
-
-	v.backendInit(a)
-
-}
-
-func (v *viper) backendInit(a *backend.Config) {
-	v.backendName = a.Backend
-
-	a.ConfigFiles = v.configFile
-	var err error
-	v.backend, err = backend.New(a)
-	if err != nil {
-		log.Println(err)
-	}
-}
-
-func (v *viper) getBackendName() string {
-	return v.backendName
-}
-
-func (v *viper) SetFunc(fn func(key string, value interface{}) error) {
-	v.fn = fn
-}
-
-func (v *viper) Stop() {
-	v.stop <- struct{}{}
+	return v
 }
 
 // SetConfigName 设置配置文件的名称
-func (v *viper) SetConfig(cfgfile, cfgtype string, cfgpath ...string) {
-	log.Println(fmt.Sprintf("配置文件:%s", cfgfile))
-
+func (v *viper) SetConfig(cfgfile, cfgtype string, cfgpath ...string) Viperable {
 	if cfgtype == "" {
 		panic("配置类型不能为空")
 	}
@@ -192,142 +120,15 @@ func (v *viper) SetConfig(cfgfile, cfgtype string, cfgpath ...string) {
 	//赋值给Operater接口
 	v.operating.SetConfigFile(v.configFile)
 
+	return v
+
 }
 
-func (v *viper) SetKeyDelim(delim string) {
-	log.Println(fmt.Sprintf("设置key的分隔符 %s", delim))
-	if delim != "" {
-		v.keyDelim = delim
-	}
+func (v *viper) SetFunc(fn func(key string, value interface{}) error) Viperable {
+	v.fn = fn
+	return v
 }
 
-// SetDefault 注册默认值
-func (v *viper) SetDefault(key string, value interface{}) {
-	v.defaults[key] = value
-	//log.Println(fmt.Sprintf("key:%s,value:%s",key,value))
-}
-
-//读取配置失败 具体的操作可以交给 调用者
-func (v *viper) ReadConfig() error {
-	file, err := files.ReadFile(v.configFile)
-	if err != nil {
-		return configReadError(v.configFile)
-	}
-
-	err = v.operating.ReadConfig(bytes.NewReader(file), v.config)
-	if err != nil {
-		return configParseError{err}
-	}
-
-	return nil
-}
-
-func (v *viper) ReadRemoteConfig() error {
-	//读取远程配置
-	var err error
-	respChan := make(chan *resp.Response, 10) //添加缓存 让etcd尽快处理完
-
-	go func() {
-		for {
-			select {
-			case a, ok := <-respChan:
-				if !ok {
-					//读取完成关闭通道，写入配置文件到本地
-					err = v.WriteConfig()
-					if err != nil {
-						fmt.Println(err, "关闭通道")
-					}
-					return
-				}
-				//fmt.Println(a)
-				err = v.Set(a.Key, a.Value)
-
-			}
-
-		}
-	}()
-
-	err = v.backend.List(respChan)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (v *viper) WriteConfig() error {
+func (v *viper) writeConfig() error {
 	return v.operating.WriteConfig(v.config)
-}
-
-//这里的stop 以后可以换成context,,  string, map，[]string  []int 都能自动转换,其他类型需要自定义fn函数
-func (v *viper) WatchConfig() error {
-
-	remotechan := v.backend.Watch(v.stop)
-	//var a backends.Response
-	go func() {
-		for {
-			select {
-			case a := <-remotechan: //TODO 还有DELETE类型没有判断
-				if a.Error != nil {
-					fmt.Println("err1", a.Error)
-					continue
-				}
-
-				if v.getBackendName() == "file" {
-					v.ReadConfig()
-					continue
-				}
-
-				//这里是其他的backend
-
-				v.Set(a.Key, a.Value)
-
-				//保存到本地
-				err := v.WriteConfig()
-				if err != nil {
-					fmt.Println(err)
-				}
-
-			case <-v.stop:
-				return
-			}
-		}
-	}()
-	//r.WatchConfig(v)
-
-	return nil
-}
-
-type Client struct {
-	client   client.KeysAPI
-	prefix   string
-	stopChan chan struct{}
-	close    bool
-}
-
-// NewEtcdClient returns an *etcd.Client with a connection to named machines.
-func NewClient(endpoint []string, Prefix string) (*Client, error) {
-	cfg := client.Config{
-		Endpoints:               endpoint,
-		Transport:               client.DefaultTransport,
-		HeaderTimeoutPerRequest: time.Second * 1,
-	}
-
-	var kapi client.KeysAPI
-
-	c, err := client.New(cfg)
-	if err != nil {
-		return nil, err
-	}
-
-	kapi = client.NewKeysAPI(c)
-	return &Client{client: kapi, prefix: Prefix}, nil
-}
-
-func (v *viper) Getdefault() map[string]interface{} {
-	return v.defaults
-}
-
-func (v *viper) Getconfig() map[string]interface{} {
-	return v.config
 }
