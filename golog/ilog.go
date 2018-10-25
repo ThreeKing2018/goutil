@@ -1,6 +1,6 @@
 package log
 
-import "gogs.163.com/feiyu/goutil/golog/conf"
+import "github.com/ThreeKing2018/goutil/golog/conf"
 
 //使用string是为了减少使用Spintf
 type ILog interface {

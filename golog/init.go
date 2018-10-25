@@ -1,8 +1,8 @@
 package log
 
 import (
-	"gogs.163.com/feiyu/goutil/golog/conf"
-	"gogs.163.com/feiyu/goutil/golog/plugins/zaplog"
+	"github.com/ThreeKing2018/goutil/golog/conf"
+	"github.com/ThreeKing2018/goutil/golog/plugins/zaplog"
 )
 
 //默认
