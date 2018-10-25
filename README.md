@@ -22,11 +22,11 @@
 | 文件操作 | [filetool](filetool) |  获取文件目录,读取,写等|
 | 格式化操作 | [formatter](formatter) |  如存储大小转换成可读的单位等|
 | 日志操作 | [logtool](logtool) |  打印不同等级日志等|
+| golog | [golog](golog) |  操作日志等|
 | 分页操作 | [paginator](paginator) |  用于数据分页操作等|
 | rpc操作 | [rpctool](rpctool) |  rpc等|
 | 切片操作 | [slicetool](slicetool) |  切片操作等|
 | 字符串操作 | [strtool](strtool) |  随机数,md5等|
-| 命令操作 | [slicetool](slicetool) |  linux相关等|
 | 命令操作 | [slicetool](slicetool) |  linux相关等|
 | goaddr | [goaddr](goaddr/readme.md) |  获取内网地址和外网地址|
 | config | [config](config/readme.md) |  配置文件-支持本地+远程配置文件读取,动态加载|
