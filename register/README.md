@@ -1,9 +1,8 @@
 ## register grpc的resolver方式服务注册
 
-由于grpc官方不在建议使用 `google.golang.org/grpc/naming` 进行服务注册，
-建议使用 `google.golang.org/grpc/resolver` 包进行服务注册。
-
-此处是服务注册的一个实现代码
+- 由于grpc官方不在建议使用 `google.golang.org/grpc/naming` 进行服务注册，
+- 建议使用 `google.golang.org/grpc/resolver` 包进行服务注册。
+- 此处是服务注册的一个实现代码
 
 ## 备注
 

@@ -10,6 +10,7 @@
  |- array
         |- array.go      //核心文件
         |- array_test.go //测试文件
+        |- readme.md     //说明文档
 ```
 
 ## 目录分类列表
@@ -30,6 +31,7 @@
 | 命令操作 | [slicetool](slicetool) |  linux相关等|
 | goaddr | [goaddr](goaddr/readme.md) |  获取内网地址和外网地址|
 | config | [config](config/readme.md) |  配置文件-支持本地+远程配置文件读取,动态加载|
+| grpc+etcd服务注册 | [register](register/README.md) |  grpc的resolver方式服务注册|
 
 
 ## 贡献来源
