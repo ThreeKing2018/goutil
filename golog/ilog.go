@@ -1,4 +1,4 @@
-package log
+package golog
 
 import "github.com/ThreeKing2018/goutil/golog/conf"
 
