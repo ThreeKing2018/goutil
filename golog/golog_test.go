@@ -1,7 +1,7 @@
 package log
 
 import (
-	"gogs.163.com/feiyu/goutil/golog/conf"
+	"github.com/ThreeKing2018/goutil/golog/conf"
 	"testing"
 	"time"
 )

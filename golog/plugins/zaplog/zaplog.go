@@ -1,9 +1,9 @@
 package zaplog
 
 import (
+	"github.com/ThreeKing2018/goutil/golog/conf"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"gogs.163.com/feiyu/goutil/golog/conf"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
 )
