@@ -1,24 +1,35 @@
 package golog
 
-import "github.com/ThreeKing2018/goutil/golog/conf"
+import (
+	"github.com/ThreeKing2018/goutil/golog/conf"
+)
 
 //使用string是为了减少使用Spintf
 type ILog interface {
-	//new
-	//普通日志,如果有args，需要格式化
-	Debug(string, ...interface{})
-	Info(string, ...interface{})
-	Warn(string, ...interface{})
-	Error(string, ...interface{})
-	Panic(string, ...interface{})
-	Fatal(string, ...interface{})
-	SetLogLevel(level conf.Level)
+	//普通日志
+	Debug(...interface{})
+	Info(...interface{})
+	Warn(...interface{})
+	Error(...interface{})
+	Panic(...interface{})
+	Fatal(...interface{})
+
+	//需要格式化日志
+	Debugf(string, ...interface{})
+	Infof(string, ...interface{})
+	Warnf(string, ...interface{})
+	Errorf(string, ...interface{})
+	Panicf(string, ...interface{})
+	Fatalf(string, ...interface{})
+
+	//key value
+	Debugw(string, ...interface{})
+	Infow(string, ...interface{})
+	Warnw(string, ...interface{})
+	Errorw(string, ...interface{})
+	Panicw(string, ...interface{})
+	Fatalw(string, ...interface{})
+
 	Sync()
-	//需要格式化日志 ，最后一个是context
-	//Debugf(string, ...interface{})
-	//Infof(string, ...interface{})
-	//Warnf(string, ...interface{})
-	//Errorf(string, ...interface{})
-	//Panicf(string, ...interface{})
-	//Fatalf(string, ...interface{})
+	SetLogLevel(conf.Level)
 }
