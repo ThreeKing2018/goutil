@@ -1,17 +1,39 @@
 package cronjobs
 
-func JobAdd() {
+import (
+	"github.com/ThreeKing2018/goutil/cronjobs/cron"
+)
 
+var _cron Croner
+var _TaskLogMana *TaskLogMana
+
+func init() {
+	_cron = NewCronJob()
+	_TaskLogMana = &TaskLogMana{
+		Count: 0,
+	}
 }
 
-func JobDel(jobID int) error {
-	return nil
+func AddJob(spec string, job *Job) error {
+	return _cron.AddJob(spec, job)
 }
 
-func JobStop(jobID int) error {
-	return nil
+func DelJob(jobID int) {
+	_cron.DelJob(jobID)
 }
 
-func JobDetail(jobID ...int) error {
-	return nil
+func DetailJob() []*cron.Entry {
+	return _cron.DetailJob()
+}
+
+func StartJob() {
+	_cron.StartJob()
+}
+
+func StopJob() {
+	_cron.StopJob()
+}
+
+func LogDetail(num int) []*TaskLog {
+	return _TaskLogMana.Detail(num)
 }

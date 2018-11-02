@@ -1,15 +1,16 @@
 package cronjobs
 
 import (
-	"github.com/robfig/cron"
+	"github.com/ThreeKing2018/goutil/cronjobs/cron"
 	"sync"
 )
 
 type Croner interface {
-	JobAdd(spec string, job *Job) error
-	JobStop(jobID int) error
-	//JobDel(jobId int) error
-	//JobDetail(uuid ...string) error
+	AddJob(spec string, job *Job) error
+	DelJob(jobID int)
+	DetailJob() []*cron.Entry
+	StartJob()
+	StopJob()
 }
 
 type cronjob struct {
@@ -21,13 +22,13 @@ func NewCronJob() Croner {
 	c := &cronjob{
 		cron: cron.New(),
 	}
-	c.cron.Start()
+	//c.cron.Start()
 	return c
 }
 
-func (c *cronjob) JobAdd(spec string, job *Job) error {
+func (c *cronjob) AddJob(spec string, job *Job) error {
 	c.mu.Lock()
-	defer c.mu.Lock()
+	defer c.mu.Unlock()
 
 	if c.getEntryById(job.id) != nil {
 		return ERR_AlreadyExisted
@@ -35,15 +36,33 @@ func (c *cronjob) JobAdd(spec string, job *Job) error {
 	return c.cron.AddJob(spec, job)
 }
 
-func (c *cronjob) JobStop(jobID int) error {
-	c.cron.AddFunc()
-	c.cron.
-		c.cron.Stop()
-	return nil
+func (c *cronjob) DelJob(jobId int) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	fn := func(e *cron.Entry) bool {
+		if v, ok := e.Job.(*Job); ok {
+			if v.id == jobId {
+				return true
+			}
+		}
+		return false
+	}
+
+	c.cron.RemoveJob(fn)
 }
 
-func (c *cronjob) JobDel(jobId int) error {
-	return nil
+func (c *cronjob) DetailJob() []*cron.Entry {
+	ret := c.cron.Entries()
+	return ret
+
+}
+
+func (c *cronjob) StartJob() {
+	c.cron.Start()
+}
+
+func (c *cronjob) StopJob() {
+	c.cron.Stop()
 }
 
 func (c *cronjob) getEntryById(id int) *cron.Entry {

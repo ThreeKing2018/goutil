@@ -2,6 +2,8 @@
 https://github.com/george518/PPGo_Job
 https://github.com/robfig/cron
 
+### 因为需要改写cron -- 增加删除任务的停止一个任务的功能
+
 ### Cron表达式说明
    Cron表达式是一个字符串，字符串以空格隔开，分为5或6个域，每一个域代表一个含义，系统支持的表达式格式如下：
    Seconds Minutes Hours DayofMonth Month [DayofWeek](其中 DayofWeek 为可选域）
