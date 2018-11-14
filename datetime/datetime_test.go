@@ -36,3 +36,14 @@ func TestGetDate(t *testing.T) {
 	tt = 1540437494
 	fmt.Println(GetDate(tt))
 }
+func Test_GetChinaDate(t *testing.T) {
+	var tt int64
+	tt = 1541385134
+	date := GetChinaDate(tt)
+	fmt.Println(date)
+}
+func Test_GetTimeStampByRFC3339(t *testing.T) {
+	str := "2018-11-05T10:32:14+08:00"
+	tt := GetTimeStampByRFC3339(str)
+	fmt.Println(tt)
+}

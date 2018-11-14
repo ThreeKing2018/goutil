@@ -65,3 +65,14 @@ func DateFormat(t time.Time, format string) string {
 	res = strings.Replace(res, "s", t.Format("5"), -1)
 	return res
 }
+
+//转换成中国人习惯时间
+func GetChinaDate(layout int64) string {
+	return DateFormat(time.Unix(layout, 0).In(ChinaLocation), "YYYY-MM-DD hh:mm:ss")
+}
+
+//获取时间戳
+func GetTimeStampByRFC3339(layout string) int64 { 	//转化所需模板
+	theTime, _ := time.ParseInLocation(time.RFC3339, layout, ChinaLocation) //使用模板在对应时区转化为time.time类型
+	return theTime.Unix()
+}
