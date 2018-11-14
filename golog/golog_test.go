@@ -1,7 +1,7 @@
-package log
+package golog
 
 import (
-	"gogs.163.com/feiyu/goutil/golog/conf"
+	"github.com/ThreeKing2018/goutil/golog/conf"
 	"testing"
 	"time"
 )
@@ -9,7 +9,8 @@ import (
 func Test_logge(t *testing.T) {
 	SetLogger(ZAPLOG,
 		conf.WithLogType(conf.LogNormalType),
-		conf.WithProjectName("a"))
+		conf.WithProjectName("go_love_coin"),
+		conf.WithLogType(conf.LogJsontype))
 
 	SetLogLevel(conf.ErrorLevel)
 	Debug("this is zap")
