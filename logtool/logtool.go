@@ -8,6 +8,9 @@ import (
 
 var level int = 0
 
+//设置日志等级 如果低于设置级别,将不会输出日志
+// @params lv string 等级级别
+// @params defaultLv string 默认级别
 func SetLevelWithDefault(lv, defaultLv string) {
 	err := SetLevel(lv)
 	if err != nil {
@@ -15,7 +18,7 @@ func SetLevelWithDefault(lv, defaultLv string) {
 		Warn("log level not valid. use default level: %s", defaultLv)
 	}
 }
-
+//直接设置级别
 func SetLevel(lv string) error {
 	if lv == "" {
 		return fmt.Errorf("log level is blank")
@@ -50,45 +53,46 @@ func SetLevel(lv string) error {
 // level: 0
 func Trace(format string, v ...interface{}) {
 	if level <= 0 {
-		p(" [T] "+format, v...)
+		p(" [Trace] "+format, v...)
 	}
 }
 
 // level: 1
 func Debug(format string, v ...interface{}) {
 	if level <= 1 {
-		p(" [D] "+format, v...)
+		p(" [Debug] "+format, v...)
 	}
 }
 
 // level: 2
 func Info(format string, v ...interface{}) {
 	if level <= 2 {
-		p(" [I] "+format, v...)
+		p(" [Info] "+format, v...)
 	}
 }
 
 // level: 3
 func Warn(format string, v ...interface{}) {
 	if level <= 3 {
-		p(" [W] "+format, v...)
+		p(" [Warn] "+format, v...)
 	}
 }
 
 // level: 4
 func Error(format string, v ...interface{}) {
 	if level <= 4 {
-		p(" [E] "+format, v...)
+		p(" [Error] "+format, v...)
 	}
 }
 
 // level: 5
 func Fetal(format string, v ...interface{}) {
 	if level <= 5 {
-		p(" [F] "+format, v...)
+		p(" [Fetal] "+format, v...)
 	}
 }
-
+//打印信息
 func p(format string, v ...interface{}) {
-	fmt.Printf(time.Now().Format("2006/01/02 15:04:05")+format+"\n", v...)
+	//fmt.Printf(time.Now().Format("2006/01/02 15:04:05")+format+"\n", v...)
+	fmt.Printf(time.Now().Format(time.RFC3339Nano)+format+"\n", v...)
 }
