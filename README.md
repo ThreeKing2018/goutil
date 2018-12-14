@@ -34,6 +34,8 @@
 | config | [config](config/readme.md) |  配置文件-支持本地+远程配置文件读取,动态加载|
 | grpc+etcd服务注册 | [register](register/README.md) |  grpc的resolver方式服务注册|
 | 常用hash函数 | [hash](hash/README.md) |  string、byte、file 的hash值 包括md5 sha1 sha256 sha512 |
+| curl | [curl](curl/curl.go) |  curl get ,post 请求 |
+| 第三方免费服务 | [Three_service](three_service) |  如: 在线验证银行卡|
 
 
 ## 贡献来源
