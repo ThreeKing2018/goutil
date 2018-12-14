@@ -17,12 +17,13 @@
 
 | 功能 | 包名 |  备注 |
 | :--- | :--- | :--- |
+| 目录操作 | [pwdtools](pwdtools/pwdtools.go) | 获取目录 |
 | 数值转换 | [convertor](convertor/readme.md) | 操作数字等 |
 | 时间操作 | [datetime](datetime/readme.md) |  获取自定义时间格式等|
 | 数组操作 | [array](array) |  数组转换等|
 | 文件操作 | [filetool](filetool) |  获取文件目录,读取,写等|
 | 格式化操作 | [formatter](formatter) |  如存储大小转换成可读的单位等|
-| 日志操作 | [logtool](logtool) |  打印不同等级日志等|
+| 日志操作 | [logtool](logtool) | 简单好用, 可以打印不同等级日志等|
 | golog | [golog](golog) |  操作日志等|
 | 分页操作 | [paginator](paginator) |  用于数据分页操作等|
 | rpc操作 | [rpctool](rpctool) |  rpc等|
