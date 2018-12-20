@@ -35,7 +35,9 @@
 | grpc+etcd服务注册 | [register](register/README.md) |  grpc的resolver方式服务注册|
 | 常用hash函数 | [hash](hash/README.md) |  string、byte、file 的hash值 包括md5 sha1 sha256 sha512 |
 | curl | [curl](curl/curl.go) |  curl get ,post 请求 |
-| 第三方免费服务 | [Three_service](three_service) |  如: 在线验证银行卡|
+| 第三方免费服务 | [Three_service](three_service/bank.go) |  如: 在线验证银行卡|
+| 定时器 | [Timer](timer/timer.go) |  实现一个定时器 |
+| 实现阻塞 | [choke](choke/choke.go) |   |
 
 
 ## 贡献来源
