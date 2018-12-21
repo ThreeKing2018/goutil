@@ -1,6 +1,11 @@
 # goutil
 > 是go 的工具集,也叫小函数 <br/>打造一站式工具库<br/>会持续更新
 
+# 安装
+```
+go get github.com/ThreeKing2018/goutil/...
+```
+
 ## 目录说明
 - 一个类别一个文件夹,文件夹里必含一个测试文件
 - 可以使用go test测试
@@ -36,8 +41,8 @@
 | 常用hash函数 | [hash](hash/README.md) |  string、byte、file 的hash值 包括md5 sha1 sha256 sha512 |
 | curl | [curl](curl/curl.go) |  curl get ,post 请求 |
 | 第三方免费服务 | [Three_service](three_service/bank.go) |  如: 在线验证银行卡|
-| 定时器 | [Timer](timer/timer.go) |  实现一个定时器 |
-| 实现阻塞 | [choke](choke/choke.go) |   |
+| 定时器 | [Timer](timer/timer.go) |  原生,实现一个简单的定时器 |
+| 实现阻塞 | [choke](choke/README.md) | 一般用于程序阻塞 , 简单好用 |
 
 
 ## 贡献来源
