@@ -1,9 +1,10 @@
 package config
 
 import (
-	"github.com/spf13/cast"
 	"strings"
 	"time"
+
+	"github.com/spf13/cast"
 )
 
 type Getvalue interface {

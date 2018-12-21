@@ -18,6 +18,7 @@ func SetLevelWithDefault(lv, defaultLv string) {
 		Warn("log level not valid. use default level: %s", defaultLv)
 	}
 }
+
 //直接设置级别
 func SetLevel(lv string) error {
 	if lv == "" {
@@ -91,6 +92,7 @@ func Fetal(format string, v ...interface{}) {
 		p(" [Fetal] "+format, v...)
 	}
 }
+
 //打印信息
 func p(format string, v ...interface{}) {
 	//fmt.Printf(time.Now().Format("2006/01/02 15:04:05")+format+"\n", v...)

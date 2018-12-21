@@ -2,12 +2,14 @@ package check
 
 import (
 	"errors"
-	"github.com/ThreeKing2018/goutil/array"
 	"path"
+
+	"github.com/ThreeKing2018/goutil/array"
 )
 
 type Check struct {
 }
+
 //检查是否包含,不包含则报错
 func (c *Check) InArrayString(layout, msg string, in []string) (err error) {
 	if array.InArray(layout, in) == false {
@@ -16,6 +18,7 @@ func (c *Check) InArrayString(layout, msg string, in []string) (err error) {
 	}
 	return
 }
+
 //检查参数是否为空
 func (c *Check) Require(layout, msg string) (err error) {
 	if layout == "" {
@@ -24,6 +27,7 @@ func (c *Check) Require(layout, msg string) (err error) {
 	}
 	return
 }
+
 //检查参数是否为空
 func (c *Check) RequireInt(layout int, msg string) (err error) {
 	if layout == 0 {
@@ -32,6 +36,7 @@ func (c *Check) RequireInt(layout int, msg string) (err error) {
 	}
 	return
 }
+
 //不相等则报错
 func (c *Check) RequireNe(layout, msg, in string) (err error) {
 	if layout == "" {
@@ -44,6 +49,7 @@ func (c *Check) RequireNe(layout, msg, in string) (err error) {
 	}
 	return
 }
+
 //相等则报错
 func (c *Check) RequireEq(layout, msg, in string) (err error) {
 	if layout == "" {
@@ -56,6 +62,7 @@ func (c *Check) RequireEq(layout, msg, in string) (err error) {
 	}
 	return
 }
+
 //检查图片是否上传
 func (c *Check) Image(layout string, msg string) (err error) {
 	if err = c.Require(layout, msg); err != nil {
@@ -67,6 +74,7 @@ func (c *Check) Image(layout string, msg string) (err error) {
 	}
 	return
 }
+
 //检查图片
 func (c *Check) CheckImageUrlAndExtension(image string, extension ...string) bool {
 	if image == "" {
@@ -84,6 +92,7 @@ func (c *Check) CheckImageUrlAndExtension(image string, extension ...string) boo
 
 	return false
 }
+
 //检查图片是否上传 支持数组
 func (c *Check) Images(layouts []string, msg string) (err error) {
 	for _, image := range layouts {
@@ -93,9 +102,10 @@ func (c *Check) Images(layouts []string, msg string) (err error) {
 	}
 	return
 }
+
 //判断map key是否存在,不存在则false
 func (c *Check) MapKey(layout map[string]interface{}, key string) bool {
-	if _, ok := layout[key];ok{
+	if _, ok := layout[key]; ok {
 		return true
 	}
 	return false

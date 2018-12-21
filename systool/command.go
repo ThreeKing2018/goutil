@@ -2,10 +2,11 @@ package systool
 
 import (
 	"bytes"
-	log "github.com/ulricqin/goutils/logtool"
-	"github.com/ulricqin/goutils/strtool"
 	"os/exec"
 	"time"
+
+	log "github.com/ulricqin/goutils/logtool"
+	"github.com/ulricqin/goutils/strtool"
 )
 
 func CmdOut(name string, arg ...string) (string, error) {

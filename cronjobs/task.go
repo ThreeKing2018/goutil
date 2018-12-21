@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/ThreeKing2018/goutil/golog"
-	"github.com/astaxie/beego"
 	"os/exec"
 	"time"
+
+	"github.com/ThreeKing2018/goutil/golog"
+	"github.com/astaxie/beego"
 )
 
 const (

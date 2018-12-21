@@ -1,11 +1,12 @@
 package pwdtools
 
 import (
-	"path/filepath"
-	"os"
-	"strings"
 	"fmt"
+	"os"
 	"os/exec"
+	"path/filepath"
+	"strings"
+
 	"github.com/ThreeKing2018/goutil/logtool"
 )
 
@@ -19,6 +20,7 @@ func GetCurrentDirectory() string {
 	}
 	return strings.Replace(dir, "\\", "/", -1) //将\替换成/
 }
+
 //获取执行文件当前的目录 最后带/
 func GetRootDir() string {
 	// 文件不存在获取执行路径
@@ -30,6 +32,7 @@ func GetRootDir() string {
 	}
 	return file
 }
+
 //获取执行文件的路径
 func GetExecFilePath() string {
 	file, err := exec.LookPath(os.Args[0])

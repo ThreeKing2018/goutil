@@ -1,8 +1,9 @@
 package cronjobs
 
 import (
-	"github.com/ThreeKing2018/goutil/cronjobs/cron"
 	"sync"
+
+	"github.com/ThreeKing2018/goutil/cronjobs/cron"
 )
 
 type Croner interface {

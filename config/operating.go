@@ -1,10 +1,11 @@
 package config
 
 import (
-	"github.com/ThreeKing2018/goutil/config/ini"
-	"github.com/ThreeKing2018/goutil/config/json"
 	"io"
 	"strings"
+
+	"github.com/ThreeKing2018/goutil/config/ini"
+	"github.com/ThreeKing2018/goutil/config/json"
 )
 
 type Operater interface {

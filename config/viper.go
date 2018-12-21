@@ -3,12 +3,13 @@ package config
 import (
 	"bytes"
 	"errors"
-	"github.com/ThreeKing2018/goutil/config/backend"
-	"github.com/ThreeKing2018/goutil/config/backend/resp"
 	"io"
 	"os"
 	"path"
 	"sync"
+
+	"github.com/ThreeKing2018/goutil/config/backend"
+	"github.com/ThreeKing2018/goutil/config/backend/resp"
 )
 
 var ErrExit = errors.New("退出配置模块")

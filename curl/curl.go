@@ -1,8 +1,8 @@
 package curl
 
 import (
-	"net/http"
 	"io/ioutil"
+	"net/http"
 )
 
 func HttpGet(url string) (reply []byte, err error) {

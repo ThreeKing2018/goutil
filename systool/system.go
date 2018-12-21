@@ -3,8 +3,6 @@ package systool
 import (
 	"bytes"
 	"fmt"
-	"github.com/ulricqin/goutils/convertor"
-	"github.com/ulricqin/goutils/filetool"
 	"math/rand"
 	"net"
 	"os"
@@ -12,6 +10,9 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/ulricqin/goutils/convertor"
+	"github.com/ulricqin/goutils/filetool"
 )
 
 func WritePidFile(pidFilePath string) error {

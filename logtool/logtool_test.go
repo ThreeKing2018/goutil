@@ -2,8 +2,6 @@ package logtool
 
 import "testing"
 
-
-
 func Test_Trace(t *testing.T) {
 	Trace("我的跟踪:%s", "Test_Trace")
 }

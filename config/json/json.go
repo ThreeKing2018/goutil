@@ -2,10 +2,11 @@ package json
 
 import (
 	"bytes"
-	"github.com/json-iterator/go"
 	"io"
 	"io/ioutil"
 	"os"
+
+	"github.com/json-iterator/go"
 )
 
 /*

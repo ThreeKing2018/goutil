@@ -1,9 +1,10 @@
 package golog
 
 import (
-	"github.com/ThreeKing2018/goutil/golog/conf"
 	"testing"
 	"time"
+
+	"github.com/ThreeKing2018/goutil/golog/conf"
 )
 
 func Test_logge(t *testing.T) {

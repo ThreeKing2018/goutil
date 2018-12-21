@@ -13,7 +13,7 @@ func TestInt64ToBytes(t *testing.T) {
 }
 func TestBytesToInt64(t *testing.T) {
 	var b []byte
-	b = []byte{0,0,0, 0, 0, 0, 39, 17}
+	b = []byte{0, 0, 0, 0, 0, 0, 39, 17}
 	_i64 := BytesToInt64(b)
 	fmt.Println(_i64)
 }

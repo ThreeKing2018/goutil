@@ -1,8 +1,8 @@
 package strtool
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestTrimRightSpace(t *testing.T) {

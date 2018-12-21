@@ -1,8 +1,9 @@
 package cronjobs
 
 import (
-	"github.com/ThreeKing2018/goutil/golog"
 	"time"
+
+	"github.com/ThreeKing2018/goutil/golog"
 )
 
 type Job struct {

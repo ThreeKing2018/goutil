@@ -1,11 +1,12 @@
 package paginator
 
 import (
-	"github.com/ulricqin/goutils/convertor"
 	"math"
 	"net/http"
 	"net/url"
 	"strconv"
+
+	"github.com/ulricqin/goutils/convertor"
 )
 
 type Paginator struct {

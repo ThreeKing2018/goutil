@@ -1,8 +1,8 @@
 package three_service
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestValidateOnlineBankCode(t *testing.T) {

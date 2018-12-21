@@ -3,8 +3,9 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/spf13/cast"
 	"strings"
+
+	"github.com/spf13/cast"
 )
 
 func (v *viper) SetSplit(key string, value []interface{}) {

@@ -3,10 +3,11 @@ package etcd
 import (
 	"context"
 	"fmt"
-	"github.com/ThreeKing2018/goutil/config/backend/resp"
-	goetcd "github.com/coreos/etcd/client"
 	"strings"
 	"time"
+
+	"github.com/ThreeKing2018/goutil/config/backend/resp"
+	goetcd "github.com/coreos/etcd/client"
 )
 
 type Response struct {

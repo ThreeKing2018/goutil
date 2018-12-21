@@ -1,10 +1,10 @@
 package choke
 
 import (
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
-	"log"
 )
 
 //实现程序阻塞

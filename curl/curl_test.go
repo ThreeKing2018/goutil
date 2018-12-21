@@ -1,11 +1,9 @@
 package curl
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
-
-
 
 func TestHttpGet(t *testing.T) {
 	url := "http://www.sgfoot.com"

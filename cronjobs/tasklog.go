@@ -1,8 +1,9 @@
 package cronjobs
 
 import (
-	"github.com/pkg/errors"
 	"sync"
+
+	"github.com/pkg/errors"
 )
 
 var defaultMaxLogLen = 100

@@ -2,26 +2,28 @@ package convertor
 
 import (
 	"encoding/binary"
-	"reflect"
 	"fmt"
+	"reflect"
 	"strconv"
 )
-
 
 //byte 转 int64
 func BytesToInt64(buf []byte) int64 {
 	return int64(binary.BigEndian.Uint64(buf))
 }
+
 //string to int
 func StringToInt(value string) (i int) {
 	i, _ = strconv.Atoi(value)
 	return
 }
+
 //int to int64
 func IntToInt64(value int) int64 {
 	i, _ := strconv.ParseInt(string(value), 10, 64)
 	return i
 }
+
 // convert any numeric value to int64
 // 任意类型转int64
 func ToInt64(value interface{}) (d int64, err error) {
@@ -38,4 +40,3 @@ func ToInt64(value interface{}) (d int64, err error) {
 	}
 	return
 }
-

@@ -3,8 +3,9 @@
 
 # 安装
 ```
-go get github.com/ThreeKing2018/goutil/...
+go get -u github.com/ThreeKing2018/goutil
 ```
+
 
 ## 目录说明
 - 一个类别一个文件夹,文件夹里必含一个测试文件
@@ -24,7 +25,7 @@ go get github.com/ThreeKing2018/goutil/...
 | :--- | :--- | :--- |
 | 目录操作 | [pwdtools](pwdtools/pwdtools.go) | 获取目录 |
 | 数值转换 | [convertor](convertor/readme.md) | 操作数字等 |
-| 时间操作 | [datetime](datetime/readme.md) |  获取自定义时间格式等|
+| 时间操作 | [time](time/readme.md) |  获取自定义时间格式等|
 | 数组操作 | [array](array) |  数组转换等|
 | 文件操作 | [filetool](filetool) |  获取文件目录,读取,写等|
 | 格式化操作 | [formatter](formatter) |  如存储大小转换成可读的单位等|

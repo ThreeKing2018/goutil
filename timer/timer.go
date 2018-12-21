@@ -1,12 +1,12 @@
 package timer
 
 import (
+	"fmt"
 	"log"
 	"time"
-	"fmt"
+
 	"github.com/yezihack/gotime"
 )
-
 
 func Start() {
 	//开个协程
@@ -19,7 +19,6 @@ func StartTicker() {
 	//使用一个死循环
 	for range ticker.C {
 		//todo
-		fmt.Println("定时器正在运行..."+ gotime.NewGoTime().Now())
+		fmt.Println("定时器正在运行..." + gotime.NewGoTime().Now())
 	}
 }
-
