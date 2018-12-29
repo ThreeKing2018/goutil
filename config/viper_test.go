@@ -61,7 +61,7 @@ func Test_viper(t *testing.T) {
 	v.SetFunc(fn)
 	//remoteCfg := &backend.Config{Backend:"file"}
 	err = v.ReadConfig()
-	//err = v.WatchConfig()
+	v.WatchConfig()
 	//err = v.AddRemoteProvider("etcd", "http://127.0.0.1:4001","/config/hugo.json")
 	if err != nil {
 		panic(err)
@@ -71,23 +71,12 @@ func Test_viper(t *testing.T) {
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
 
-	fmt.Println(v.Getconfig())
-	fmt.Println(v.GetBool("debug"))
-	//fmt.Println(v.GetString("port"))
-	//fmt.Println(v.GetInt("port1"))
-	//fmt.Println(v.GetString("port1"))
-	fmt.Println(v.GetString("key4.a"))
-	//fmt.Println(v.GetString("a.c.as"))
-	//fmt.Println(v.GetString("a.c.cb.ca"))
-	//fmt.Println(v.GetStringMap("a.c.cb")["ca"])
-
-	//
 	//for {
 	//	fmt.Println(v.GetBool("debug"))
 	//}
 	//for {
 	//	time.Sleep(3*time.Second)
-	//	//fmt.Println(v.GetInt("asasa"))
+	//	fmt.Println(v.GetInt("asasa"))
 	//	fmt.Println(v.GetBool("debug"))
 	//	//fmt.Println(v.GetStringMap("key4")["a"])
 	//	//fmt.Println(v.GetIntSlice("key3"))
@@ -98,7 +87,7 @@ func Test_viper(t *testing.T) {
 	//
 	//}
 	////fmt.Println(v.Getconfig())
-	time.Sleep(1 * time.Hour)
+	time.Sleep(100 * time.Hour)
 	v.Stop()
 
 	//fmt.Println(v.Getdefault())

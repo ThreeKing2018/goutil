@@ -1,16 +1,10 @@
 package file
 
 import (
+	"fmt"
 	"github.com/ThreeKing2018/goutil/config/backend/resp"
 	"github.com/fsnotify/fsnotify"
 )
-
-type Response struct {
-	Action string
-	Key    string
-	Value  []byte
-	Error  error
-}
 
 type client struct {
 	configFile string
@@ -49,19 +43,22 @@ func (c *client) Watch(stop chan struct{}) <-chan *resp.Response {
 		}
 
 		for {
+			fmt.Println("a")
 			select {
 			case event := <-watcher.Events:
-				//fmt.Println(event)
+				fmt.Println("event", event)
 				if event.Op&fsnotify.Remove == fsnotify.Remove ||
 					event.Op&fsnotify.Rename == fsnotify.Rename ||
 					event.Op&fsnotify.Write == fsnotify.Write ||
 					event.Op&fsnotify.Create == fsnotify.Create {
 					watcher.Remove(c.configFile)
+					watcher.Close()
 					watcher.Add(c.configFile)
-
+					fmt.Println("aaaaaaaaaaaaaaaa")
 					//需要读取配置文件
 					//通过chan通知
 					respChan <- respdata
+					break
 				}
 
 			case err := <-watcher.Errors:

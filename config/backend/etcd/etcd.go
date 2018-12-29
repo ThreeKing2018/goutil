@@ -10,13 +10,6 @@ import (
 	goetcd "github.com/coreos/etcd/client"
 )
 
-type Response struct {
-	Action string
-	Key    string
-	Value  []byte
-	Error  error
-}
-
 type client struct {
 	prefix    string
 	keysAPI   goetcd.KeysAPI

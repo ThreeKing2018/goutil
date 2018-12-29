@@ -23,7 +23,7 @@ func (v *viper) WatchConfig() {
 				}
 
 				if v.backendName == "file" {
-					v.ReadConfig()
+					//v.ReadConfig()
 					continue
 				}
 

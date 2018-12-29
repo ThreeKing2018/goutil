@@ -34,13 +34,6 @@ type StoreClient interface {
 	Watch(stop chan struct{}) <-chan *resp.Response
 }
 
-//type Response struct {
-//	Action string
-//	Key   string
-//	Value []byte
-//	Error error
-//}
-
 func New(config *Config) (StoreClient, error) {
 	if config.Backend == "" {
 		config.Backend = "file"
@@ -52,11 +45,13 @@ func New(config *Config) (StoreClient, error) {
 		//return etcd.NewClient(config.Endpoint,config.Prefix)
 		return etcd.NewClient(config.Endpoint, config.Prefix, config.Delim)
 
+	case "etcdv3":
+		//return etcdv3.NewClient(config.Endpoint, config.Prefix, config.Delim)
+
 	case "file":
 		return file.NewClient(config.ConfigFiles)
 
 	case "consul":
-	case "etcdv3":
 	case "redis":
 
 	}

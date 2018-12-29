@@ -28,6 +28,9 @@ type Viperable interface {
 	////配置文件动态加载
 	WatchConfig()
 	Stop()
+
+	//Get方法
+	Getvalue
 }
 
 type viper struct {
@@ -154,7 +157,7 @@ func (v *viper) SetRemote(prefix, remoteType string, endpoint []string) Viperabl
 }
 
 func (v *viper) ReadConfig() error {
-	if v.remoteConf == nil {
+	if v.remoteConf != nil {
 		//获取远程配置
 		return v.readRemoteConfig()
 	}
@@ -174,6 +177,15 @@ func (v *viper) localReadConfig() error {
 		return configParseError{err}
 	}
 
+	v.remoteConf = &backend.Config{
+		Backend:     "file",
+		ConfigFiles: v.configFile,
+	}
+	v.backend, err = backend.New(v.remoteConf)
+	if err != nil {
+		return err
+	}
+	v.remoteConf = nil
 	return nil
 }
 
@@ -189,28 +201,31 @@ func (v *viper) readRemoteConfig() error {
 
 	respChan := make(chan *resp.Response, 10) //添加缓存 让etcd尽快处理完
 
+	//TODO 这里错误需要错误下
+	go func() error {
+		for {
+			select {
+			case a, ok := <-respChan:
+				if !ok {
+					//读取完成关闭通道，写入配置文件到本地
+					err = v.writeConfig()
+					if err != nil {
+						return err
+					}
+					return nil
+				}
+				err = v.Set(a.Key, a.Value)
+			case <-v.stop:
+				{
+					return ErrExit
+				}
+			}
+		}
+	}()
+
 	err = v.backend.List(respChan)
 	if err != nil {
 		return err
-	}
-
-	for {
-		select {
-		case a, ok := <-respChan:
-			if !ok {
-				//读取完成关闭通道，写入配置文件到本地
-				err = v.writeConfig()
-				if err != nil {
-					return err
-				}
-				return nil
-			}
-			err = v.Set(a.Key, a.Value)
-		case <-v.stop:
-			{
-				return ErrExit
-			}
-		}
 	}
 
 	return nil
