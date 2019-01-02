@@ -1,7 +1,7 @@
 package config
 
 import (
-	"fmt"
+	"time"
 
 	"github.com/ThreeKing2018/goutil/golog"
 )
@@ -17,13 +17,22 @@ func (v *viper) WatchConfig() {
 	go func() {
 		for {
 			select {
-			case a := <-remotechan: //TODO 还有DELETE类型没有判断
+			case a,ok := <-remotechan: //TODO 还有DELETE类型没有判断
+			if !ok {
+				golog.Error("watch配置出问题了,重启开启watch")
+				time.Sleep(1*time.Second)
+				v.Stop()
+				go v.WatchConfig()
+				return
+			}
 				if a.Error != nil {
+					golog.Error(a.Error)
 					continue
 				}
 
 				if v.backendName == "file" {
-					//v.ReadConfig()
+					v.ReadConfig()
+					//v.Stop()
 					continue
 				}
 
@@ -37,7 +46,6 @@ func (v *viper) WatchConfig() {
 				err = v.writeConfig()
 				if err != nil {
 					golog.Error(err.Error())
-					fmt.Println(err)
 				}
 
 			case <-v.stop:

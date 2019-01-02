@@ -73,6 +73,7 @@ func New() Viperable {
 		return nil
 	}
 	v.remoteConf = nil
+	v.backendName = "file"
 
 	return v
 }
@@ -171,7 +172,6 @@ func (v *viper) localReadConfig() error {
 	if err != nil {
 		return configReadError(v.configFile)
 	}
-
 	err = v.operating.ReadConfig(bytes.NewReader(file), v.config)
 	if err != nil {
 		return configParseError{err}
@@ -202,7 +202,7 @@ func (v *viper) readRemoteConfig() error {
 	respChan := make(chan *resp.Response, 10) //添加缓存 让etcd尽快处理完
 
 	//TODO 这里错误需要错误下
-	go func() error {
+	go func()  {
 		for {
 			select {
 			case a, ok := <-respChan:
@@ -210,14 +210,14 @@ func (v *viper) readRemoteConfig() error {
 					//读取完成关闭通道，写入配置文件到本地
 					err = v.writeConfig()
 					if err != nil {
-						return err
+						return
 					}
-					return nil
+					return
 				}
 				err = v.Set(a.Key, a.Value)
 			case <-v.stop:
 				{
-					return ErrExit
+					return
 				}
 			}
 		}

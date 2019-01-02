@@ -6,6 +6,7 @@ import (
 	"github.com/ThreeKing2018/goutil/golog/conf"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 type Log struct {
