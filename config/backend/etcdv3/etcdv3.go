@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/ThreeKing2018/goutil/config/backend/resp"
-	goetcd "github.com/coreos/etcd/clientv3"
+	goetcd "go.etcd.io/etcd/clientv3"
 	"strings"
 	"time"
 )

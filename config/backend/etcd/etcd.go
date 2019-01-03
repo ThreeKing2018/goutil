@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/ThreeKing2018/goutil/config/backend/resp"
-	goetcd "github.com/coreos/etcd/client"
-)
+	goetcd "go.etcd.io/etcd/client"
+	)
 
 type client struct {
 	prefix    string
