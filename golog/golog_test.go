@@ -10,7 +10,7 @@ import (
 func Test_logge(t *testing.T) {
 	SetLogger(ZAPLOG,
 		conf.WithLogType(conf.LogNormalType),
-		conf.WithProjectName("go_love_coin"),
+		conf.WithProjectName("go_xxx"),
 		conf.WithLogType(conf.LogJsontype))
 
 	SetLogLevel(conf.ErrorLevel)
