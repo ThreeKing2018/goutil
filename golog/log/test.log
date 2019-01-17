@@ -1,0 +1,9 @@
+{"L":"DEBUG","T":"2019-01-17T18:07:37.696+0800","C":"golog/golog_test.go:20","M":"[this is zap]","service":"go_xxx"}
+{"L":"DEBUG","T":"2019-01-17T18:07:37.697+0800","C":"golog/golog_test.go:21","M":"[this is zap]","service":"go_xxx"}
+{"L":"DEBUG","T":"2019-01-17T18:11:09.654+0800","C":"golog/golog_test.go:20","M":"[this is zap]","service":"go_xxx"}
+{"L":"DEBUG","T":"2019-01-17T18:11:09.655+0800","C":"golog/golog_test.go:21","M":"[this is zap]","service":"go_xxx"}
+{"L":"DPANIC","T":"2019-01-17T18:11:09.655+0800","C":"golog/init.go:84","M":"Ignored key without a value.","service":"go_xxx","ignored":100}
+{"L":"INFO","T":"2019-01-17T18:11:09.655+0800","C":"golog/golog_test.go:22","M":"aa","service":"go_xxx"}
+{"L":"DEBUG","T":"2019-01-17T18:12:23.149+0800","C":"golog/golog_test.go:20","M":"[this is zap]","service":"go_xxx"}
+{"L":"DEBUG","T":"2019-01-17T18:12:23.149+0800","C":"golog/golog_test.go:21","M":"[this is zap]","service":"go_xxx"}
+{"L":"INFO","T":"2019-01-17T18:12:23.149+0800","C":"golog/golog_test.go:22","M":"aa","service":"go_xxx","aaa":100}

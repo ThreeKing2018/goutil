@@ -1,0 +1,9 @@
+{"L":"DEBUG","T":"2019-01-17T18:13:27.825+0800","C":"golog/golog_test.go:21","M":"[this is zap]","service":"go_xxx"}
+{"L":"DEBUG","T":"2019-01-17T18:13:27.825+0800","C":"golog/golog_test.go:22","M":"[this is zap]","service":"go_xxx"}
+{"L":"INFO","T":"2019-01-17T18:13:27.825+0800","C":"golog/golog_test.go:23","M":"aa","service":"go_xxx","aaa":100}
+{"L":"DEBUG","T":"2019-01-17T18:14:02.314+0800","C":"golog/golog_test.go:22","M":"[this is zap]","service":"go_xxx"}
+{"L":"DEBUG","T":"2019-01-17T18:14:02.315+0800","C":"golog/golog_test.go:23","M":"[this is zap]","service":"go_xxx"}
+{"L":"INFO","T":"2019-01-17T18:14:02.315+0800","C":"golog/golog_test.go:24","M":"aa","service":"go_xxx","aaa":100}
+{"L":"DEBUG","T":"2019-01-17T18:14:12.530+0800","C":"golog/golog_test.go:22","M":"[this is zap]","service":"go_xxx"}
+{"L":"DEBUG","T":"2019-01-17T18:14:12.530+0800","C":"golog/golog_test.go:23","M":"[this is zap]","service":"go_xxx"}
+{"L":"INFO","T":"2019-01-17T18:14:12.530+0800","C":"golog/golog_test.go:24","M":"aa","service":"go_xxx","aaa":100}

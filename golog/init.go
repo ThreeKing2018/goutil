@@ -55,7 +55,7 @@ func Fatal(args ...interface{}) {
 	l.Fatal(args...)
 }
 
-//需要格式化日志
+//需要格式化日志dlog.error("err",err)
 func Debugf(format string, args ...interface{}) {
 	l.Debugf(format, args...)
 }
