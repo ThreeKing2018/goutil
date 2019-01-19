@@ -12,7 +12,6 @@ type backend uint8
 
 const (
 	ZAPLOG backend = iota
-	DlOG
 )
 
 //设置
@@ -20,8 +19,6 @@ func SetLogger(b backend, opts ...conf.Option) {
 	switch b {
 	case ZAPLOG:
 		l = zaplog.New(opts...)
-	case DlOG:
-
 	}
 }
 

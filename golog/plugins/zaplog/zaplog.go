@@ -110,7 +110,7 @@ func New(opts ...conf.Option) *Log {
 }
 
 func (l *Log) Sync() {
-	l.logger.Sync()
+	l.Sync()
 }
 
 func (l *Log) SetLogLevel(level conf.Level) {
